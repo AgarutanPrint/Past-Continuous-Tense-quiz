@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Continuous Tense Made Easy - Quiz</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Verdana, Arial, sans-serif;
+    background: #f4f6fb;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px 12px;
+  }
+  .app { width: 100%; max-width: 480px; }
+  .card {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 24px 20px;
+  }
+
+  /* ---------- MENU ---------- */
+  .brand {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9aa0ab;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .quiz-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #2c2c40;
+    margin: 0 0 4px 0;
+  }
+  .quiz-subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 22px;
+  }
+  .section-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 14px;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: transform .15s ease;
+  }
+  .section-btn:active { transform: scale(0.97); }
+  .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    flex-shrink: 0;
+  }
+  .sec-emoji { font-size: 20px; }
+
+  /* ---------- STATS BAR ---------- */
+  .stats-bar {
+    display: flex;
+    justify-content: space-between;
+    background: #f0f2f8;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 16px;
+  }
+  .stats-bar span { white-space: nowrap; }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .section-header .name {
+    font-weight: 800;
+    font-size: 15px;
+    color: #2c2c40;
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: #eceef4;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width .3s ease;
+  }
+
+  .question-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: #2c2c40;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .hint-box {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #8a6d00;
+    margin-bottom: 14px;
+    display: none;
+  }
+  .hint-btn {
+    background: none;
+    border: 1px solid #ffca28;
+    color: #a67c00;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 14px;
+  }
+
+  .option-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #f7f8fc;
+    border: 2px solid #e4e7f0;
+    border-radius: 12px;
+    padding: 13px 14px;
+    font-size: 15px;
+    color: #33334d;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .option-btn:hover { background: #eef0f9; }
+  .option-btn.correct {
+    background: #e3f7e6;
+    border-color: #4caf50;
+    color: #1b5e20;
+    font-weight: 700;
+  }
+  .option-btn.wrong {
+    background: #fdeaea;
+    border-color: #ef5350;
+    color: #b71c1c;
+    font-weight: 700;
+  }
+  .option-btn:disabled { cursor: default; }
+
+  .feedback-banner {
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 6px 0 16px 0;
+  }
+  .feedback-banner.correct { background: #e3f7e6; color: #1b5e20; }
+  .feedback-banner.wrong { background: #fdeaea; color: #b71c1c; }
+
+  .next-btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .exit-btn {
+    display: inline-block;
+    background: #fff0f0;
+    border: 1.5px solid #ef9a9a;
+    color: #c62828;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 14px;
+  }
+  .exit-btn:hover {
+    background: #ef9a9a;
+    border-color: #c62828;
+    color: #b71c1c;
+  }
+
+  /* ---------- END SCREEN ---------- */
+  .end-screen { text-align: center; }
+  .trophy { font-size: 56px; margin-bottom: 6px; }
+  .end-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #2c2c40;
+    margin-bottom: 6px;
+  }
+  .stars { margin: 10px 0 18px 0; }
+  .star {
+    font-size: 30px;
+    display: inline-block;
+    opacity: 0;
+    transform: scale(0.2);
+    animation: popIn .4s forwards;
+  }
+  @keyframes popIn { to { opacity: 1; transform: scale(1); } }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+  .pill {
+    background: #f0f2f8;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #444;
+  }
+  .end-btn-row { display: flex; gap: 10px; }
+  .end-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .btn-primary { color: #fff; }
+  .btn-secondary { background: #eceef4; color: #33334d; }
+  .encourage-emoji { font-size: 50px; margin-bottom: 8px; }
+
+  /* ---------- REVIEW BOX ---------- */
+  .review-box {
+    text-align: left;
+    background: #f7f7fb;
+    border: 1px solid #e4e4ee;
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 22px;
+  }
+  .review-box .review-header {
+    font-weight: 800;
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  .review-box .review-question {
+    font-weight: 700;
+    font-size: 15px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  .review-box p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+  }
+  .review-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #1a1a2e;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="card" id="app-card"></div>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const PAPERBACK_ASIN = "";
+const HARDCOVER_ASIN = "";
+
+function getUrlParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+const SRC = getUrlParam("src");
+
+/* ================= DATA ================= */
+const SECTIONS = [
+  {
+    id: "part_a",
+    name: "Part A: Positive Sentences",
+    emoji: "📘",
+    color: "#1976d2",
+    colorDark: "#0d47a1",
+    isMastery: false,
+    questions: [
+      { q: "What is the formula for Past Continuous tense?", options: ["was/were + verb-ing","did + base verb","will + verb","has/have + verb-ed"], correct: 0 },
+      { q: "Which helping verb goes with I / He / She / It?", options: ["was","were","did","is"], correct: 0 },
+      { q: "Which helping verb goes with You / We / They?", options: ["were","was","did","are"], correct: 0 },
+      { q: "Complete: Maya ___ (paint) a picture when I called her.", options: ["was painting","were painting","is painting","painted"], correct: 0 },
+      { q: "Complete: Leo and John ___ (play) soccer all afternoon.", options: ["were playing","was playing","are playing","played"], correct: 0 },
+      { q: "Complete: Bob ___ (sleep) when the doorbell rang.", options: ["was sleeping","were sleeping","is sleeping","slept"], correct: 0 },
+      { q: "Choose the correct form: write → Mr. Brown was ___ on the board.", options: ["writing","writeing","writting","writng"], correct: 0, hint: "Drop the silent -e before adding -ing!" },
+      { q: "Choose the correct form: dance → The children were ___ to music.", options: ["dancing","danceing","dancceing","dansing"], correct: 0, hint: "Drop the silent -e before adding -ing!" },
+      { q: "Choose the correct form: run → Bob was ___ fast.", options: ["running","runing","runeing","runnning"], correct: 0, hint: "Double the last letter for short CVC verbs!" },
+      { q: "Choose the correct form: swim → We were ___ in the pool.", options: ["swimming","swiming","swimeing","swimmming"], correct: 0, hint: "Double the last letter for short CVC verbs!" },
+      { q: "Complete: Look back! The ducks ___ (swim) across the lake at that moment.", options: ["were swimming","was swimming","are swimming","swam"], correct: 0 },
+      { q: "Complete: I ___ (draw) a dinosaur while my sister napped.", options: ["was drawing","were drawing","am drawing","drew"], correct: 0 },
+      { q: "Complete: Maya and Mom ___ (bake) cupcakes at 4 o'clock yesterday.", options: ["were baking","was baking","are baking","baked"], correct: 0, hint: "Drop the silent -e before adding -ing!" },
+      { q: "Complete: We ___ (sit) quietly when the teacher walked in.", options: ["were sitting","was sitting","are sitting","sat"], correct: 0, hint: "Double the last letter for short CVC verbs!" },
+      { q: "Complete: She ___ (pack) her lunchbox while Dad made coffee.", options: ["was packing","were packing","is packing","packed"], correct: 0 },
+      { q: "Complete: They ___ (wave) goodbye as the bus drove away.", options: ["were waving","was waving","are waving","waved"], correct: 0, hint: "Drop the silent -e before adding -ing!" }
+    ]
+  },
+  {
+    id: "part_b",
+    name: "Part B: Negatives & Questions",
+    emoji: "⚡",
+    color: "#2e7d32",
+    colorDark: "#1b5e20",
+    isMastery: false,
+    questions: [
+      { q: "What is the formula for negative sentences in Past Continuous?", options: ["Subject + was/were + not + verb-ing","Subject + didn't + base verb","Subject + not + was/were","Subject + don't + verb-ing"], correct: 0 },
+      { q: "Which contraction is used for he/she/it in negative sentences?", options: ["wasn't","weren't","didn't","isn't"], correct: 0 },
+      { q: "Which contraction is used for you/we/they in negative sentences?", options: ["weren't","wasn't","didn't","aren't"], correct: 0 },
+      { q: "Complete: Maya ___ listening to music. (negative)", options: ["wasn't","weren't","didn't","doesn't"], correct: 0 },
+      { q: "Complete: We ___ watching TV at that moment. (negative)", options: ["weren't","wasn't","didn't","doesn't"], correct: 0 },
+      { q: "What is the formula for questions in Past Continuous?", options: ["Was/Were + Subject + verb-ing?","Did + Subject + base verb?","Do/Does + Subject + verb?","Has/Have + Subject + verb-ed?"], correct: 0 },
+      { q: "Complete: ___ Leo sleeping at 9 o'clock last night?", options: ["Was","Were","Did","Is"], correct: 0 },
+      { q: "Complete: ___ you doing your homework at 5 o'clock yesterday?", options: ["Were","Was","Did","Are"], correct: 0 },
+      { q: "Does the main verb ever lose its -ing in Past Continuous questions or negatives?", options: ["No, it always keeps -ing","Yes, it drops to base form","Yes, it adds -ed instead","No, it becomes irregular"], correct: 0 },
+      { q: "Which time clue shows two actions happening at once?", options: ["while","yesterday","every day","usually"], correct: 0 },
+      { q: "Which time clue shows an action was interrupted by another?", options: ["when","always","often","every week"], correct: 0 },
+      { q: "Which time clue is similar in meaning to \"while\"?", options: ["as","then","next","later"], correct: 0 },
+      { q: "Which time clue signals a specific moment in the past?", options: ["at 8 o'clock yesterday","every day","right now","usually"], correct: 0 },
+      { q: "Which time clue signals a longer duration in the past?", options: ["all afternoon yesterday","right now","today","sometimes"], correct: 0 },
+      { q: "Complete: Bob the dog ___ (bark) at the door when the mailman came.", options: ["was barking","were barking","barked","barks"], correct: 0 },
+      { q: "What is the correct short answer to \"Was Bob sleeping?\" (yes)", options: ["Yes, he was.","Yes, he did.","Yes, he is.","Yes, he does."], correct: 0 },
+      { q: "What is the correct short answer to \"Were they playing tag?\" (no)", options: ["No, they weren't.","No, they wasn't.","No, they didn't.","No, they aren't."], correct: 0 },
+      { q: "Which pattern shows a longer action interrupted by a shorter one?", options: ["Was/Were + verb-ing + while/when + Simple Past","Did + base verb + while + verb-ing","Was/Were + verb-ing + verb-ing","Simple Past + Simple Past"], correct: 0 }
+    ]
+  },
+  {
+    id: "mastery_test",
+    name: "Mastery Test",
+    emoji: "🏆",
+    color: "#7b1fa2",
+    colorDark: "#4a148c",
+    isMastery: true,
+    questions: [
+      { q: "Maya and Leo ___ soccer in the backyard when it started to rain.", options: ["were playing","was playing","playing","did play"], correct: 0 },
+      { q: "Look at the time! Bob the dog ___ at the mailman at 9 o'clock yesterday.", options: ["was barking","were barking","barked not","is barking"], correct: 0 },
+      { q: "We ___ our homework while Dad was cooking dinner.", options: ["were doing","was doing","doed","did doing"], correct: 0 },
+      { q: "Select the correct negative form: Mr. Brown ___ on the board when the bell rang.", options: ["wasn't writing","weren't writing","was writing not","didn't writing"], correct: 0 },
+      { q: "Which question is formed correctly?", options: ["Were you sleeping when I called?","Was you sleeping when I called?","You were sleeping when I called?","Did you sleeping when I called?"], correct: 0 },
+      { q: "Which sentence uses the correct spelling rule (doubling for short CVC verbs)?", options: ["I was running in the park.","I was runing in the park.","I was runnning in the park.","I running in the park."], correct: 0 },
+      { q: "Which sentence uses the correct spelling rule (dropping silent -e)?", options: ["She was dancing to the music.","She was danceing to the music.","She was dancceing to the music.","She dancing to the music."], correct: 0 },
+      { q: "While Leo was reading a comic, Maya ___ a picture.", options: ["was drawing","were drawing","is drawing","did drawing"], correct: 0 },
+      { q: "___ they walking home when the sky turned dark?", options: ["Were","Was","Did","Are"], correct: 0 },
+      { q: "I ___ watching TV at 7 o'clock last night.", options: ["was","were","am","is"], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["Maya was painting a picture when I called her.","Maya painting a picture when I called her.","Maya were painting a picture when I called her.","Maya is painting a picture when I called her."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["Leo and John were playing soccer all afternoon.","Leo and John was playing soccer all afternoon.","Leo and John is playing soccer all afternoon.","Leo and John played soccer all afternoon still."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["We were swimming in the pool when it rained.","We was swimming in the pool when it rained.","We are swimming in the pool when it rained.","We swimming in the pool when it rained."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["Bob wasn't barking at the cat last night.","Bob wasn't bark at the cat last night.","Bob weren't barking at the cat last night.","Bob didn't barking at the cat last night."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["Were you listening to loud music at 9 o'clock?","Was you listening to loud music at 9 o'clock?","Did you listening to loud music at 9 o'clock?","Are you listening to loud music at 9 o'clock ago?"], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["The children were dancing to the music in the hallway.","The children were danceing to the music in the hallway.","The children was dancing to the music in the hallway.","The children dancing to the music in the hallway."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["I was running fast during gym class yesterday.","I was runing fast during gym class yesterday.","I were running fast during gym class yesterday.","I running fast during gym class yesterday."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["They weren't doing their homework at 5 o'clock.","They wasn't doing their homework at 5 o'clock.","They didn't doing their homework at 5 o'clock.","They isn't doing their homework at 5 o'clock."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["Mr. Brown was writing on the chalkboard when the fire alarm rang.","Mr. Brown was writeing on the chalkboard when the fire alarm rang.","Mr. Brown were writing on the chalkboard when the fire alarm rang.","Mr. Brown is writing on the chalkboard when the fire alarm rang yesterday."], correct: 0 },
+      { q: "Which sentence is written correctly?", options: ["While Leo was doing his homework, the dog barked.","While Leo doing his homework, the dog barked.","While Leo were doing his homework, the dog barked.","While Leo did doing his homework, the dog barked."], correct: 0 }
+    ]
+  }
+];
+
+/* ================= STATE ================= */
+let state = {
+  screen: "menu",
+  sectionIndex: 0,
+  questions: [],
+  qIndex: 0,
+  points: 0,
+  correct: 0,
+  wrong: 0,
+  hintUsed: false,
+  answered: false,
+  _wasCorrectFlag: false
+};
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function prepSection(section) {
+  const count = Math.min(15, section.questions.length);
+  const picked = shuffle(section.questions).slice(0, count);
+  return picked.map(q => {
+    const options = q.options.map((text, i) => ({ text, isCorrect: i === q.correct }));
+    return { q: q.q, hint: q.hint || null, options: shuffle(options) };
+  });
+}
+
+function startSection(index) {
+  state.sectionIndex = index;
+  state.questions = prepSection(SECTIONS[index]);
+  state.qIndex = 0;
+  state.points = 0;
+  state.correct = 0;
+  state.wrong = 0;
+  state.hintUsed = false;
+  state.answered = false;
+  state.screen = "quiz";
+  render();
+}
+
+function goMenu() {
+  state.screen = "menu";
+  render();
+}
+
+function answer(idx) {
+  if (state.answered) return;
+  state.answered = true;
+  const question = state.questions[state.qIndex];
+  const opt = question.options[idx];
+  state._wasCorrectFlag = opt.isCorrect;
+  if (opt.isCorrect) {
+    state.correct++;
+    state.points += state.hintUsed ? 5 : 10;
+  } else {
+    state.wrong++;
+  }
+  render();
+}
+
+function useHint() {
+  state.hintUsed = true;
+  render();
+}
+
+function nextQuestion() {
+  state.qIndex++;
+  state.hintUsed = false;
+  state.answered = false;
+  if (state.qIndex >= state.questions.length) {
+    state.screen = "end";
+  }
+  render();
+}
+
+function isAnswerCorrect() {
+  return !!state._wasCorrectFlag;
+}
+
+/* ================= RENDER ================= */
+function render() {
+  const card = document.getElementById("app-card");
+  if (state.screen === "menu") card.innerHTML = renderMenu();
+  else if (state.screen === "quiz") card.innerHTML = renderQuiz();
+  else if (state.screen === "end") card.innerHTML = renderEnd();
+  attachHandlers();
+}
+
+function renderMenu() {
+  let btns = SECTIONS.map((s, i) => {
+    const bg = s.isMastery
+      ? `linear-gradient(135deg, #7b1fa2, #4a148c)`
+      : s.color;
+    return `
+      <button class="section-btn" style="background:${bg}" data-start="${i}">
+        <span class="dot"></span>
+        <span class="sec-emoji">${s.emoji}</span>
+        <span>${s.name}</span>
+      </button>
+    `;
+  }).join("");
+  return `
+    <div class="brand">Agarutan Print</div>
+    <div class="quiz-title">Past Continuous Tense Made Easy!</div>
+    <div class="quiz-subtitle">Grades 2-4 &middot; ESL/ELL &middot; Test your skills!</div>
+    ${btns}
+  `;
+}
+
+function renderQuiz() {
+  const section = SECTIONS[state.sectionIndex];
+  const question = state.questions[state.qIndex];
+  const total = state.questions.length;
+  const progressPct = Math.round(((state.qIndex + (state.answered ? 1 : 0)) / total) * 100);
+  const scorePct = (state.correct + state.wrong) > 0
+    ? Math.round((state.correct / (state.correct + state.wrong)) * 100)
+    : 0;
+
+  let optionsHtml = question.options.map((opt, i) => {
+    let cls = "option-btn";
+    let disabled = "";
+    if (state.answered) {
+      disabled = "disabled";
+      if (opt.isCorrect) cls += " correct";
+      else cls += " wrong";
+    }
+    return `<button class="${cls}" ${disabled} data-answer="${i}">${opt.text}</button>`;
+  }).join("");
+
+  let hintSection = "";
+  if (question.hint) {
+    hintSection = `
+      <button class="hint-btn" id="hint-btn" style="display:${state.hintUsed ? "none" : "inline-block"}">💡 Use a Hint (-5 pts)</button>
+      <div class="hint-box" id="hint-box" style="display:${state.hintUsed ? "block" : "none"}">${question.hint}</div>
+    `;
+  }
+
+  const barColor = section.isMastery ? "#7b1fa2" : section.color;
+
+  return `
+    <button class="exit-btn" id="exit-btn">← Exit to Menu</button>
+    <div class="stats-bar">
+      <span>⭐ ${state.points} pts</span>
+      <span>✅ ${state.correct}</span>
+      <span>❌ ${state.wrong}</span>
+      <span>🎯 ${scorePct}%</span>
+    </div>
+    <div class="section-header">
+      <span class="dot" style="background:${barColor}"></span>
+      <span class="sec-emoji">${section.emoji}</span>
+      <span class="name">${section.name}</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" style="width:${progressPct}%; background:${barColor}"></div>
+    </div>
+    <div class="question-text">Q${state.qIndex + 1} of ${total}: ${question.q}</div>
+    ${hintSection}
+    ${optionsHtml}
+    ${state.answered ? `
+      <div class="feedback-banner ${isAnswerCorrect() ? "correct" : "wrong"}">
+        ${isAnswerCorrect() ? "✅ Correct! Great job!" : "❌ Not quite — check the highlighted answer."}
+      </div>
+      <button class="next-btn" id="next-btn" style="background:${barColor}">
+        ${state.qIndex + 1 >= total ? "See Results →" : "Next Question →"}
+      </button>
+    ` : ""}
+  `;
+}
+
+function renderEnd() {
+  const section = SECTIONS[state.sectionIndex];
+  const total = state.correct + state.wrong;
+  const pct = total > 0 ? Math.round((state.correct / total) * 100) : 0;
+  const barColor = section.isMastery ? "#7b1fa2" : section.color;
+
+  let reviewBoxHtml = "";
+  if (section.isMastery && pct >= 70 && SRC) {
+    let buttonsHtml = "";
+    if (SRC === "etsy") {
+      buttonsHtml = `<a class="review-btn" href="https://www.etsy.com/your/purchases" target="_blank" rel="noopener">Leave a Review on Etsy</a>`;
+    } else if (SRC === "amazon") {
+      if (PAPERBACK_ASIN) {
+        buttonsHtml += `<a class="review-btn" href="https://www.amazon.com/review/create-review?asin=${PAPERBACK_ASIN}" target="_blank" rel="noopener">Review the Paperback</a>`;
+      }
+      if (HARDCOVER_ASIN) {
+        buttonsHtml += `<a class="review-btn" href="https://www.amazon.com/review/create-review?asin=${HARDCOVER_ASIN}" target="_blank" rel="noopener">Review the Hardcover</a>`;
+      }
+    }
+    if (buttonsHtml) {
+      reviewBoxHtml = `
+        <div class="review-box">
+          <div class="review-header">🔒 Notice: For Parents &amp; Educators</div>
+          <div class="review-question">How did you like this complete resource bundle?</div>
+          <p>Thank you for choosing Agarutan Print! We hope this combination of printable worksheets, the digital fillable PDF, and the interactive quiz bonus is helping to build your student's skills.</p>
+          <p>If this comprehensive resource bundle added value to your student's learning experience, please take a brief moment to share your feedback. Your review helps us continue creating high-quality learning assets!</p>
+          ${buttonsHtml}
+        </div>
+      `;
+    }
+  }
+
+  if (pct >= 70) {
+    let tier = "🌟 Great Job";
+    if (pct === 100) tier = "🏆 Spectacular";
+    else if (pct >= 85) tier = "⭐ Excellent";
+
+    let stars = "";
+    for (let i = 0; i < 5; i++) {
+      stars += `<span class="star" style="animation-delay:${i * 0.15}s">⭐</span>`;
+    }
+
+    return `
+      <div class="end-screen">
+        <div class="trophy">🏆</div>
+        <div class="stars">${stars}</div>
+        <div class="end-title">${tier}</div>
+        <div class="pills">
+          <div class="pill">⭐ ${state.points} pts</div>
+          <div class="pill">✅ ${state.correct} correct</div>
+          <div class="pill">❌ ${state.wrong} wrong</div>
+          <div class="pill">🎯 ${pct}%</div>
+        </div>
+        <div class="end-btn-row">
+          <button class="end-btn btn-primary" style="background:${barColor}" id="try-again">Try Again</button>
+          <button class="end-btn btn-secondary" id="menu-btn">Menu</button>
+        </div>
+        ${reviewBoxHtml}
+      </div>
+    `;
+  } else {
+    return `
+      <div class="end-screen">
+        <div class="encourage-emoji">💪</div>
+        <div class="end-title">Keep Practicing!</div>
+        <div class="pills">
+          <div class="pill">⭐ ${state.points} pts</div>
+          <div class="pill">✅ ${state.correct} correct</div>
+          <div class="pill">❌ ${state.wrong} wrong</div>
+          <div class="pill">🎯 ${pct}%</div>
+        </div>
+        <div class="end-btn-row">
+          <button class="end-btn btn-primary" style="background:${barColor}" id="try-again">Try Again</button>
+          <button class="end-btn btn-secondary" id="menu-btn">Menu</button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function attachHandlers() {
+  document.querySelectorAll("[data-start]").forEach(btn => {
+    btn.addEventListener("click", () => startSection(parseInt(btn.getAttribute("data-start"))));
+  });
+  const exitBtn = document.getElementById("exit-btn");
+  if (exitBtn) exitBtn.addEventListener("click", goMenu);
+
+  const hintBtn = document.getElementById("hint-btn");
+  if (hintBtn) hintBtn.addEventListener("click", useHint);
+
+  document.querySelectorAll("[data-answer]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.getAttribute("data-answer"));
+      answer(idx);
+    });
+  });
+
+  const nextBtn = document.getElementById("next-btn");
+  if (nextBtn) nextBtn.addEventListener("click", nextQuestion);
+
+  const tryAgain = document.getElementById("try-again");
+  if (tryAgain) tryAgain.addEventListener("click", () => startSection(state.sectionIndex));
+
+  const menuBtn = document.getElementById("menu-btn");
+  if (menuBtn) menuBtn.addEventListener("click", goMenu);
+}
+
+render();
+</script>
+</body>
+</html>
